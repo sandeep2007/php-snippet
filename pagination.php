@@ -1,12 +1,11 @@
 <?php
-
-function pagination($limit, $total, $page_number = NULL, array $config = array(), $callback = null)
+//function
+function pagination($limit, $total, $page_number = NULL, array $config, $callback = null)
 {
 
     $page_number = (empty(trim($page_number)) || $page_number == NULL) ? 1 : $page_number;
     $total_pages = ceil($total / $limit);
     $config['link_limit'] = (isset($config['link_limit'])) ? $config['link_limit'] : 3;
-    $pagLink = "";
 
     $startIndex = ($page_number -  $config['link_limit']);
     $endIndex = ($page_number +  $config['link_limit']);
@@ -98,7 +97,7 @@ function pagination($limit, $total, $page_number = NULL, array $config = array()
 
 ?>
 
-
+<!-- css style -->
 <style>
     .pagination {
         display: flex;
@@ -140,6 +139,7 @@ function pagination($limit, $total, $page_number = NULL, array $config = array()
 </style>
 
 <?php
+//pagination template
 $pagination_config = array(
     'start_tag' => '<ul class="pagination">',
     'link' => '<li class="item"><a href="?page={link}">{value}</a></li>',
@@ -147,5 +147,8 @@ $pagination_config = array(
     'end_tag' => '</ul>',
     'link_limit' => 4,
 );
-pagination(10, 0, @$_GET['page'], $pagination_config);
+
+//initialize pagination
+//pagination(<limit>, <total_records>, <page index>, <pagination_templete default:Array>, <callback default:null>);
+pagination(10, 100, @$_GET['page'],$pagination_config);
 ?>
